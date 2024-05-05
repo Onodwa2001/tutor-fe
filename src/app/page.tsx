@@ -15,7 +15,10 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}`).then(res => console.log(res))
+    fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}`)
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
   }, [])
 
   const words = [
