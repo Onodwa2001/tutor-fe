@@ -112,7 +112,7 @@ function SearchPage() {
                 <select className="select select-bordered w-full max-w-xs">
                     <option disabled>Search Suburb</option>
                     <option>Khayelitsha</option>
-                    <option>Mitchelle's plain</option>
+                    <option>Mitchelles plain</option>
                 </select>
                 <label htmlFor="suburb" style={{ color: 'white', marginRight: 10 }}>Add suburb filter</label>
                 <input type="checkbox" name="suburb" id="" />
