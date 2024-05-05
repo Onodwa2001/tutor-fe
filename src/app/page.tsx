@@ -18,7 +18,6 @@ export default function Home() {
     fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}`)
       .then(res => res.json())
       .then(data => console.log(data))
-      .catch(err => console.log(err))
   }, [])
 
   const words = [
