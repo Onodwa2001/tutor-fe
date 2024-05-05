@@ -21,9 +21,9 @@ function SearchPage() {
     const [tutors, setTutors] = useState<Tutor[]>([]);
 
     async function fetchData() {
-        const hostnameVar: string = process.env.API_SEARCH_TUTORS_ENDPOINT ?? 'http://localhost:3000/error';
+        const hostname = process.env.NEXT_PUBLIC_HOSTNAME;
         try {
-            const res = await fetch("http://localhost:3000/tutor/search", {
+            const res = await fetch(`${hostname}/tutor/search`, {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
