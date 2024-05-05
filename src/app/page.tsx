@@ -7,11 +7,17 @@ import { useRouter } from "next/navigation";
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import Font Awesome styles
 import './globals.css';
+import { useEffect } from "react";
 
 config.autoAddCss = false;
 
 export default function Home() {
   const router = useRouter();
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/`);
+  }, [])
+
   const words = [
     {
       text: "Find",
