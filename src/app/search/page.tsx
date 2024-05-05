@@ -1,17 +1,65 @@
+"use client"
 import Navbar from "@/components/Navbar";
+import TutorCard from "@/components/ui/tutorCard";
 import { faCity, faFilter, faFunnelDollar, faHouse, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons/faCoffee";
+import { faCoffee, width } from "@fortawesome/free-solid-svg-icons/faCoffee";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { error } from "console";
+import React, { useEffect, useState } from "react";
+
+type Tutor = {
+    id: string;
+    name: string;
+    city: string;
+    suburb: string;
+    startingPrice: number;
+    endingPrice: number;
+};
 
 function SearchPage() {
 
-    const card = {
-        padding: 20,
-        boxShadow: '0 8px 12px 0 rgba(0, 0, 0, 0.2)',
-        borderRadius: 8,
-        marginBottom: 20
+    const [tutors, setTutors] = useState<Tutor[]>([]);
+
+    async function fetchData() {
+        const hostnameVar: string = process.env.API_SEARCH_TUTORS_ENDPOINT ?? 'http://localhost:3000/error';
+        try {
+            const res = await fetch("http://localhost:3000/tutor/search", {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    city: "Cape Town",
+                    suburb: "Khayelitsha"
+                }),
+            });
+            let json = await res.json();
+            setTutors(json);
+        } catch (err) {
+            console.log(err);
+        }
     }
+
+    const handleFilterSearch = () => {
+        fetchData();
+    }
+
+    const [selectedCity, setSelectedCity] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
+
+    // Event handler for select change
+    const handleSelectChange = (event: any) => {
+        setSelectedCity(event.target.value);
+    };
+
+    // Event handler for checkbox change
+    const handleCheckboxChange = (event: any) => {
+        setIsChecked(event.target.checked);
+        if (event.target.checked) {
+            // Checkbox is checked, log the current selection
+            console.log('Current selection:', selectedCity);
+        }
+    };
 
     const filter = {
         marginRight: 20,
@@ -41,35 +89,46 @@ function SearchPage() {
                 <h2 style={{ color: 'white', fontWeight: 500, marginTop: 20 }}>Filters</h2>
 
                 <h3 style={{ color: 'white', fontWeight: 300, marginTop: 40, marginBottom: 5 }}>City</h3>
-                <select className="select select-bordered w-full max-w-xs">
-                    <option disabled selected>Search City</option>
-                    <option value="1">Han Solo</option>
-                    <option value="1">Greedo</option>
-                </select>
-                <label htmlFor="city" style={{ color: 'white', marginRight: 10 }}>Add city filter</label>
-                <input type="checkbox" name="city" id="" />
+                <select
+                className="select select-bordered w-full max-w-xs"
+                value={selectedCity}
+                onChange={handleSelectChange}
+            >
+                <option value="Search City" disabled>Search City</option>
+                <option value="Cape Town">Cape Town</option>
+                <option value="Johannesburg">Johannesburg</option>
+            </select>
+
+            <label htmlFor="city" style={{ color: 'white', marginRight: 10 }}>Add city filter</label>
+            <input
+                type="checkbox"
+                name="city"
+                id="city"
+                onChange={handleCheckboxChange}
+                checked={isChecked}
+            />
 
                 <h3 style={{ color: 'white', fontWeight: 300, marginTop: 40, marginBottom: 5 }}>Suburb</h3>
                 <select className="select select-bordered w-full max-w-xs">
-                    <option disabled selected>Search Suburb</option>
-                    <option>Han Solo</option>
-                    <option>Greedo</option>
+                    <option disabled>Search Suburb</option>
+                    <option>Khayelitsha</option>
+                    <option>Mitchelle's plain</option>
                 </select>
                 <label htmlFor="suburb" style={{ color: 'white', marginRight: 10 }}>Add suburb filter</label>
                 <input type="checkbox" name="suburb" id="" />
 
                 <h3 style={{ color: 'white', fontWeight: 300, marginTop: 40, marginBottom: 5 }}>Charging rate (hour)</h3>
                 <select className="select select-bordered w-full max-w-xs">
-                    <option disabled selected>Choose range</option>
-                    <option>Han Solo</option>
-                    <option>Greedo</option>
+                    <option disabled>Choose range</option>
+                    <option>150-200</option>
+                    <option>200-250</option>
+                    <option>250-300</option>
                 </select>
                 <label htmlFor="suburb" style={{ color: 'white', marginRight: 10 }}>Add suburb filter</label>
                 <input type="checkbox" name="suburb" id="" />
-                
             </div>
 
-            <div className="right" style={{ 
+            <div className="right" style={{
                 width: '85%',
                 marginLeft: '15%'
             }}>
@@ -91,20 +150,21 @@ function SearchPage() {
                         <div className="filter" style={filter}>200-300 <span>x</span></div>
                     </div>
 
-                    <h1 style={{ fontSize: 22 }}>Results: 3</h1>
+                    <h1 style={{ fontSize: 22 }}>Results: {tutors.length}</h1>
                     <div className="search-results">
-                        <div className="tutor-card" style={card}>
-                            <h1>Mike James</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, enim recusandae. Placeat corrupti libero atque ullam ut, labore velit aliquam architecto consectetur veniam et ipsum deleniti tempora eaque nam? Ipsa.</p>
-                        </div>
-                        <div className="tutor-card" style={card}>
-                            <h1>Mike James</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, enim recusandae. Placeat corrupti libero atque ullam ut, labore velit aliquam architecto consectetur veniam et ipsum deleniti tempora eaque nam? Ipsa.</p>
-                        </div>
-                        <div className="tutor-card" style={card}>
-                            <h1>Mike James</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, enim recusandae. Placeat corrupti libero atque ullam ut, labore velit aliquam architecto consectetur veniam et ipsum deleniti tempora eaque nam? Ipsa.</p>
-                        </div>
+
+                    {tutors.map((tutor: any, index: number) => (
+                        <TutorCard
+                            key={index} 
+                            firstName={tutor.firstName}
+                            lastName={tutor.lastName}
+                            image={'https://media.istockphoto.com/id/163174954/photo/male-portrait.jpg?s=2048x2048&w=is&k=20&c=2_0KhrOEQphsS5slQMlcKvFF7xNIcU9aNMDnYotZ42o='}
+                            bio={tutor.tutor.bio}
+                            city={tutor.tutor.city}
+                            suburb={tutor.tutor.suburb}
+                        />
+                    ))}
+
                     </div>
                 </div>
             </div>
