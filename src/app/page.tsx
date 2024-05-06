@@ -59,7 +59,9 @@ export default function Home() {
             >
               Find Tutor
             </button>
-            <button className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
+            <button className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm"
+              onClick={() => router.push('/signup')}
+            >
               Signup
             </button>
           </div>
