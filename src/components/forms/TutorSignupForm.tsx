@@ -132,10 +132,10 @@ export default function TutorSignupForm() {
                 <label className="text-black" htmlFor="city">
                     city
                 </label>
-                <textarea
+                <input
                     className="px-3 py-2 bg-gray-200 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
                     id="city"
-                    placeholder="Say something about yourself"
+                    placeholder="Enter your city"
                     required
                     name="city"
                     value={city}
@@ -147,10 +147,10 @@ export default function TutorSignupForm() {
                 <label className="text-black" htmlFor="suburb">
                     suburb
                 </label>
-                <textarea
+                <input
                     className="px-3 py-2 bg-gray-200 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
                     id="suburb"
-                    placeholder="Say something about yourself"
+                    placeholder="Enter your suburb"
                     required
                     name="suburb"
                     value={suburb}
