@@ -2,6 +2,7 @@
 import { faLocation, faLocationDot, faLocationPin, faLocationPinLock, faMapLocation } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
+import { DragCloseDrawerExample } from './tutorDetails'
 
 function TutorCard(props: any) {
 
@@ -10,7 +11,8 @@ function TutorCard(props: any) {
         boxShadow: '0 8px 12px 0 rgba(0, 0, 0, 0.2)',
         borderRadius: 8,
         marginBottom: 20,
-        display: 'flex'
+        display: 'flex',
+        position: 'relative'
     }
 
     const imgWrapper = {
@@ -18,7 +20,7 @@ function TutorCard(props: any) {
     }
 
     const info = {
-        padding: 20
+        padding: 20,
     }
 
     return (
@@ -37,6 +39,14 @@ function TutorCard(props: any) {
                     }}><FontAwesomeIcon icon={faLocationDot} /> {props.city}, {props.suburb}</span>
                 </h1>
                 <p>{props.bio}</p>
+                <DragCloseDrawerExample />
+                <button className="btn"
+                    style={{
+                        position: 'absolute',
+                        right: 20,
+                        bottom: 18
+                    }}
+                >Connect</button>
             </div>
         </div>
     )
