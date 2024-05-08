@@ -4,9 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { DragCloseDrawerExample } from './tutorDetails'
 
+type MyStyle = {
+    padding: number;
+    boxShadow: string;
+    borderRadius: number;
+    marginBottom: number;
+    display: string;
+    position: 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'; // Modify this line
+};
+
 function TutorCard(props: any) {
 
-    const cardStyle = {
+    const cardStyle: MyStyle = {
         padding: 20,
         boxShadow: '0 8px 12px 0 rgba(0, 0, 0, 0.2)',
         borderRadius: 8,
