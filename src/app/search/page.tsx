@@ -1,11 +1,13 @@
 "use client"
 import Navbar from "@/components/Navbar";
 import TutorCard from "@/components/ui/tutorCard";
+import { DragCloseDrawerExample } from "@/components/ui/tutorDetails";
 import { faCity, faFilter, faFunnelDollar, faHouse, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import { faCoffee, width } from "@fortawesome/free-solid-svg-icons/faCoffee";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { error } from "console";
 import React, { FormEvent, useEffect, useState } from "react";
+import filterEmptyProperties from "../utils/filterEmptyProps";
 
 type Tutor = {
     id: string;
@@ -37,16 +39,6 @@ function SearchPage() {
         } catch (err) {
             console.log(err);
         }
-    }
-
-    function filterEmptyProperties<T extends Record<string, any>>(obj: T): T {
-        const filteredObj: Partial<T> = {};
-        for (const [key, value] of Object.entries(obj)) {
-            if (value !== null && value !== undefined && value !== '') {
-                filteredObj[key as keyof T] = value;
-            }
-        }
-        return filteredObj as T;
     }
     
 
@@ -195,15 +187,18 @@ function SearchPage() {
                     </div>
 
                     {tutors.map((tutor: any, index: number) => (
-                        <TutorCard
-                            key={index} 
-                            firstName={tutor.firstName}
-                            lastName={tutor.lastName}
-                            image={'https://media.istockphoto.com/id/163174954/photo/male-portrait.jpg?s=2048x2048&w=is&k=20&c=2_0KhrOEQphsS5slQMlcKvFF7xNIcU9aNMDnYotZ42o='}
-                            bio={tutor.tutor.bio}
-                            city={tutor.tutor.city}
-                            suburb={tutor.tutor.suburb}
-                        />
+                        <>
+                            <TutorCard
+                                key={index} 
+                                firstName={tutor.firstName}
+                                lastName={tutor.lastName}
+                                image={'https://media.istockphoto.com/id/163174954/photo/male-portrait.jpg?s=2048x2048&w=is&k=20&c=2_0KhrOEQphsS5slQMlcKvFF7xNIcU9aNMDnYotZ42o='}
+                                bio={tutor.tutor.bio}
+                                city={tutor.tutor.city}
+                                suburb={tutor.tutor.suburb}
+                            />
+                            <DragCloseDrawerExample tutorCard={ TutorCard } />
+                        </>
                     ))}
 
                     </div>

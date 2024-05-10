@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useMeasure from "react-use-measure";
 import {
   useDragControls,
@@ -7,18 +7,28 @@ import {
   motion,
 } from "framer-motion";
 
-export const DragCloseDrawerExample = () => {
+export const DragCloseDrawerExample = (props: any) => {
   const [open, setOpen] = useState(false);
+  const [tutor, setTutor] = useState(props.tutorCard);
+
+  console.log(tutor);
+  
+  // useEffect(() => {
+  //   setOpen(props.open);
+  // },[])
+
   return (
-    <div 
+    <div  
     // className="grid h-screen place-content-center bg-neutral-950"
     >
-      <button
+      {/* <button
         onClick={() => setOpen(true)}
         className="rounded bg-indigo-500 px-4 py-2 text-white transition-colors hover:bg-indigo-600"
       >
         Open drawer
-      </button>
+      </button> */}
+      
+
 
       <DragCloseDrawer open={open} setOpen={setOpen}>
         <div className="mx-auto max-w-2xl space-y-4 text-neutral-400">

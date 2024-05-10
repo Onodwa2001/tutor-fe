@@ -15,6 +15,8 @@ type MyStyle = {
 
 function TutorCard(props: any) {
 
+    const [modal, setModal] = useState(false);
+
     const cardStyle: MyStyle = {
         padding: 20,
         boxShadow: '0 8px 12px 0 rgba(0, 0, 0, 0.2)',
@@ -32,8 +34,13 @@ function TutorCard(props: any) {
         padding: 20,
     }
 
+    const handleModal = () => {
+        setModal(true);
+        alert('clicked');
+    }
+
     return (
-        <div className="tutor-card" style={cardStyle}>
+        <div className="tutor-card" style={cardStyle} onClick={handleModal}>
             <div className="image" style={imgWrapper}>
                 <img src={props.image} style={{ borderRadius: 8, border: 'solid rgb(53, 130, 245)' }} height="100%" width="100%" alt="" />
             </div>
@@ -48,7 +55,7 @@ function TutorCard(props: any) {
                     }}><FontAwesomeIcon icon={faLocationDot} /> {props.city}, {props.suburb}</span>
                 </h1>
                 <p>{props.bio}</p>
-                <DragCloseDrawerExample />
+                {/* <DragCloseDrawerExample open={ modal } /> */}
                 <button className="btn"
                     style={{
                         position: 'absolute',
