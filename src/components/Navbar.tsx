@@ -1,6 +1,8 @@
 "use client"
+import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+import jwt from 'jsonwebtoken';
 
 function Navbar() {
 
@@ -9,10 +11,21 @@ function Navbar() {
     let [displaySearchBtn, setdisplaySearchBtn] = useState('');
     let [displaySearchInput, setDisplaySearchInput] = useState('none');
     const [loggedInUser, setLoggedInUser] = useState<string | null>(null);
+    const [userId, setUserId] = useState<string>('');
 
     const handleSearchBtnClick = () => {
         router.push('/search');
     }
+
+    const decodeToken = (token: any) => {
+        try {
+            const decoded = jwt.decode(token);
+            return decoded;
+        } catch (error: any) {
+            console.error('Error decoding token:', error.message);
+            return null;
+        }
+    };
 
     useEffect(() => {
         if (currentPathname === '/search') {
@@ -24,6 +37,8 @@ function Navbar() {
         if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
             const authToken = localStorage.getItem('auth_token');
             setLoggedInUser(authToken);
+            const decodedToken = JSON.parse(JSON.stringify(decodeToken(authToken)));
+            setUserId(decodedToken.id);
         }
     }, [])
 
@@ -74,10 +89,10 @@ function Navbar() {
                     </div>
                     <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                         <li>
-                            <a className="justify-between">
+                            <Link className="justify-between" href="/profile/[slug]" as={`/profile/${userId}`}>
                                 Profile
                                 <span className="badge">New</span>
-                            </a>
+                            </Link>
                         </li>
                         <li><a>Settings</a></li>
                         <li>
