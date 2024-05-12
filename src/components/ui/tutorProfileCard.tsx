@@ -1,5 +1,6 @@
 // "use client"
 import filterEmptyProperties from '@/app/utils/filterEmptyProps';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { FormEvent, useEffect, useState } from 'react'
 
 export default function TutorProfileCard(props: any) {
@@ -10,12 +11,18 @@ export default function TutorProfileCard(props: any) {
     const [suburb, setSuburb] = useState<string>('');
     const [buttonName, setButtonName] = useState<string>('Confirm Update');
     const [closeModal, setCloseModal] = useState<boolean>(false);
+    const [inProfilePage, setInProfilePage] = useState<boolean>(false);
 
     useEffect(() => {
         // Check if `window` and `localStorage` are defined
         if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
             const authToken = localStorage.getItem('auth_token');
             setLoggedInUser(authToken);
+            let pathname = window.location.pathname.split('/')[1];
+
+            if (pathname === 'profile') {
+                setInProfilePage(true);
+            }
         }
     }, [])
 
@@ -85,13 +92,13 @@ export default function TutorProfileCard(props: any) {
                                         </span> {props.userData.email} </a>
                                 </div>
                             </div>
-                            {loggedInUser == null && (
+                            {!inProfilePage && (
                                 <div className="flex flex-wrap my-auto">
                                     <a href="" className="inline-block px-6 py-3 mr-3 text-base font-medium leading-normal text-center align-middle transition-colors duration-150 ease-in-out border-0 shadow-none cursor-pointer rounded-2xl text-muted bg-light border-light hover:bg-light-dark active:bg-light-dark focus:bg-light-dark "> Connect </a>
                                     <a href="" className="inline-block px-6 py-3 text-base font-medium leading-normal text-center text-white align-middle transition-colors duration-150 ease-in-out border-0 shadow-none cursor-pointer rounded-2xl bg-primary hover:bg-primary-dark active:bg-primary-dark focus:bg-primary-dark "> Message </a>
                                 </div>
                             )}
-                            {loggedInUser && (
+                            {inProfilePage && (
                                 <div className="flex flex-wrap my-auto">
                                     {/* The button to open modal */}
                                     <label htmlFor="my_modal_7" className="btn leading-normal text-white align-middle transition-colors duration-150 ease-in-out border-0 shadow-none cursor-pointer rounded-2xl bg-primary hover:bg-primary-dark active:bg-primary-dark focus:bg-primary-dark ">

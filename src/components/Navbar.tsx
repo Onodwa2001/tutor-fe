@@ -48,6 +48,7 @@ function Navbar() {
             borderRadius: 8,
             width: '95%',
             margin: 'auto',
+            zIndex: 2
         }}>
             <div className="navbar-start">
                 <div className="dropdown">

@@ -158,7 +158,7 @@ function SearchPage() {
                 width: '85%',
                 marginLeft: '15%'
             }}>
-                <div className="navwrapper" style={{ position: "fixed", width: '85%' }}>
+                <div className="navwrapper" style={{ position: "fixed", width: '85%', zIndex: 2 }}>
                     <Navbar />
                 </div>
 
@@ -190,14 +190,15 @@ function SearchPage() {
                         <>
                             <TutorCard
                                 key={index} 
+                                id={tutor.id}
                                 firstName={tutor.firstName}
                                 lastName={tutor.lastName}
                                 image={'https://media.istockphoto.com/id/163174954/photo/male-portrait.jpg?s=2048x2048&w=is&k=20&c=2_0KhrOEQphsS5slQMlcKvFF7xNIcU9aNMDnYotZ42o='}
                                 bio={tutor.tutor?.bio}
                                 city={tutor.tutor?.city}
                                 suburb={tutor.tutor?.suburb}
+                                chargePerHour={tutor.tutor?.chargePerHour}
                             />
-                            <DragCloseDrawerExample tutorCard={ TutorCard } />
                         </>
                     ))}
 
