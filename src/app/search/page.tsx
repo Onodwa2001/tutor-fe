@@ -193,9 +193,9 @@ function SearchPage() {
                                 firstName={tutor.firstName}
                                 lastName={tutor.lastName}
                                 image={'https://media.istockphoto.com/id/163174954/photo/male-portrait.jpg?s=2048x2048&w=is&k=20&c=2_0KhrOEQphsS5slQMlcKvFF7xNIcU9aNMDnYotZ42o='}
-                                bio={tutor.tutor.bio}
-                                city={tutor.tutor.city}
-                                suburb={tutor.tutor.suburb}
+                                bio={tutor.tutor?.bio}
+                                city={tutor.tutor?.city}
+                                suburb={tutor.tutor?.suburb}
                             />
                             <DragCloseDrawerExample tutorCard={ TutorCard } />
                         </>

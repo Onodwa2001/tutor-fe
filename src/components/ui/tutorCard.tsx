@@ -42,19 +42,19 @@ function TutorCard(props: any) {
     return (
         <div className="tutor-card" style={cardStyle} onClick={handleModal}>
             <div className="image" style={imgWrapper}>
-                <img src={props.image} style={{ borderRadius: 8, border: 'solid rgb(53, 130, 245)' }} height="100%" width="100%" alt="" />
+                <img src={props?.image} style={{ borderRadius: 8, border: 'solid rgb(53, 130, 245)' }} height="100%" width="100%" alt="" />
             </div>
             <div className="info" style={info}>
-                <h1 style={{ color: 'rgb(53, 130, 245)', fontWeight: 700, fontSize: 20 }}>{props.firstName} {props.lastName} 
+                <h1 style={{ color: 'rgb(53, 130, 245)', fontWeight: 700, fontSize: 20 }}>{props?.firstName} {props?.lastName} 
                     <span style={{
                         fontStyle: 'italic',
                         color: 'black',
                         fontSize: 12,
                         marginLeft: 12,
                         fontWeight: 400
-                    }}><FontAwesomeIcon icon={faLocationDot} /> {props.city}, {props.suburb}</span>
+                    }}><FontAwesomeIcon icon={faLocationDot} /> {props?.city}, {props?.suburb}</span>
                 </h1>
-                <p>{props.bio}</p>
+                <p>{props?.bio}</p>
                 {/* <DragCloseDrawerExample open={ modal } /> */}
                 <button className="btn"
                     style={{
