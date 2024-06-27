@@ -27,20 +27,20 @@ function Navbar() {
         }
     };
 
-    useEffect(() => {
-        if (currentPathname === '/search') {
-            setdisplaySearchBtn('none');
-            setDisplaySearchInput('block');
-        }
+    // useEffect(() => {
+    //     if (currentPathname === '/search') {
+    //         setdisplaySearchBtn('none');
+    //         setDisplaySearchInput('block');
+    //     }
 
-        // Check if `window` and `localStorage` are defined
-        if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
-            const authToken = localStorage.getItem('auth_token');
-            setLoggedInUser(authToken);
-            const decodedToken = JSON.parse(JSON.stringify(decodeToken(authToken)));
-            setUserId(decodedToken.id);
-        }
-    }, [])
+    //     // Check if `window` and `localStorage` are defined
+    //     if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+    //         const authToken = localStorage.getItem('auth_token');
+    //         setLoggedInUser(authToken);
+    //         const decodedToken = JSON.parse(JSON.stringify(decodeToken(authToken)));
+    //         setUserId(decodedToken.id);
+    //     }
+    // }, [])
 
     return (
         <div className="navbar bg-base-100" style={{
