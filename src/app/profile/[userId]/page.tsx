@@ -40,6 +40,7 @@ function ProfilePage() {
       console.log(err);
     }
     result = await user?.json();
+    console.log(result);
 
     setUserData(result);
     setDataRetrieved(true);

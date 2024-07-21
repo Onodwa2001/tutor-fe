@@ -30,10 +30,11 @@ function SearchPage() {
             const res = await fetch(`${hostname}/tutor/search`, {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
             });
+            // console.log(res.json());
             let json = await res.json();
             setTutors(json);
         } catch (err) {
