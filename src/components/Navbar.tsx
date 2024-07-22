@@ -42,7 +42,7 @@ function Navbar() {
             const authToken = localStorage.getItem('auth_token');
             setLoggedInUser(authToken);
             const decodedToken = JSON.parse(JSON.stringify(decodeToken(authToken)));
-            setUserId(decodedToken.id);
+            setUserId(decodedToken?.id);
         }
     }, [])
 
