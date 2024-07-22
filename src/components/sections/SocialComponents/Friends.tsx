@@ -1,7 +1,6 @@
 import { decodeJwtToken } from '@/app/utils/auth-token';
 import { faBell, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import FriendRequests from './SocialComponents/FriendRequests';
 import Friends from './SocialComponents/Friends';
 import Chat from './SocialComponents/Chat';
@@ -13,7 +13,9 @@ function SocialComponent() {
       }}
     >
       <FriendRequests />
-      <Chat />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Chat />
+      </Suspense>
       <Friends />
     </div>
   )
