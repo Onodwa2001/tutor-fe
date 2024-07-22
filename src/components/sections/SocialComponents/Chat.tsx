@@ -1,6 +1,6 @@
 import { decodeJwtToken } from '@/app/utils/auth-token';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 function Chat() {
     const [messages, setMessages] = useState<any>([]);
@@ -9,6 +9,7 @@ function Chat() {
     const searchParams = useSearchParams();
     const hostname = process.env.NEXT_PUBLIC_HOSTNAME;
     const [friend, setFriend] = useState<any>();
+    const containerRef = useRef<any>(null);
 
     const handleSendMessage = (e: any) => {
         e.preventDefault();
@@ -70,8 +71,12 @@ function Chat() {
             getMessagesFromServer(search?.toString());
         }, 1000);
 
+        if (containerRef.current) {
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+
         return () => clearInterval(interval);
-    }, [searchParams])
+    }, [searchParams, containerRef.current?.scrollHeight])
 
     return (
         <div className="flex flex-col h-screen p-4 bg-gray-100" style={{ width: '60%' }}>
@@ -84,9 +89,10 @@ function Chat() {
                 >
                 <h1>{friend?.firstName} {friend?.lastName}</h1>
             </div>
-            <div className="flex-grow overflow-y-auto p-4 bg-white rounded shadow-sm">
+            <div className="flex-grow overflow-y-auto p-4 bg-white rounded shadow-sm"
+                ref={containerRef}>
                 {messages.map((message: any) => (
-                    message.senderId === loggedInUser?.id ? (
+                    message.senderId !== loggedInUser?.id ? (
                         <div key={message.id} className="my-2"   
                             style={{
                                 maxWidth: '70%',
