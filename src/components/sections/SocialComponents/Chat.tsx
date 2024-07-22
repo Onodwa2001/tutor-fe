@@ -1,3 +1,4 @@
+import { decodeJwtToken } from '@/app/utils/auth-token';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
@@ -59,6 +60,9 @@ function Chat() {
     }
 
     useEffect(() => {
+        const loggedInUser = decodeJwtToken(localStorage.getItem('auth_token') || '');
+        setLoggedInUser(loggedInUser);
+
         const search = searchParams.get('id') || '';
         findUser(search);
 
@@ -82,9 +86,23 @@ function Chat() {
             </div>
             <div className="flex-grow overflow-y-auto p-4 bg-white rounded shadow-sm">
                 {messages.map((message: any) => (
-                    <div key={message.id} className="my-2">
-                        <div className={"p-2 rounded shadow-sm bg-blue-200"}>{message.content}</div>
-                    </div>
+                    message.senderId === loggedInUser?.id ? (
+                        <div key={message.id} className="my-2"   
+                            style={{
+                                maxWidth: '70%',
+                            }}
+                            >
+                            <div className={"p-2 rounded shadow-sm bg-blue-500 text-white"}>{message.content}</div>
+                        </div>
+                    ) : (
+                        <div key={message.id} className="my-2 ml-auto"
+                            style={{
+                                maxWidth: '70%',
+                            }}
+                            >
+                            <div className={"p-2 rounded shadow-sm bg-gray-200"}>{message.content}</div>
+                        </div>
+                    )
                 ))}
             </div>
             <form onSubmit={handleSendMessage} className="mt-4 flex">

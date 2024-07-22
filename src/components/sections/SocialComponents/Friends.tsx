@@ -55,14 +55,17 @@ function Friends() {
                             {friend.firstName} {friend.lastName}
                         </span>
                     </div>
-                    <Link href={"/social?id=" + friend.id}>
+                    {/* <Link href={"/social?id=" + friend.id}> */}
                         <button
                             className="px-4 py-2 text-white rounded"
                             style={{ backgroundColor: 'inherit' }}
+                            onClick={() => {
+                                window.location.href = "http://" + window.location.host + window.location.pathname + "?id=" + friend.id;
+                            }}
                         >
                             <FontAwesomeIcon icon={faMessage} color='black' size='lg' />
                         </button>
-                    </Link>
+                    {/* </Link> */}
                 </div>
             ))}
         </div>
